@@ -45,8 +45,16 @@ public:
         char buffer[26];
         ctime_s(buffer, sizeof(buffer), &licenseExpirationDate);
         cout << "License Expiration Date: " << buffer;
-
-        cout << "Days until License Expiration: " << daysUntilExpiration() << " days" << endl;
+        const int days = daysUntilExpiration();
+        if (days < 0)
+        {
+            cout << "License is expired" << endl;
+            return;
+        }
+        else
+        {
+            cout << "Days until License Expiration: " << days << " days" << endl;
+        }
     }
 };
 
@@ -75,7 +83,7 @@ int runTask3()
 
         string programName, developer, expirationDateString;
         double volumeOccupied;
-        
+
         cout << "\nEnter software details: \n";
         cout << "Enter program name: ";
         cin >> programName;
